@@ -13,3 +13,14 @@ func main() {
     }
 
 }
+
+func process(conn net.Conn) {
+	defer conn.Close()
+
+	for {
+		msg, _ := bufio.NewReader(conn).ReadString('\n')
+		fmt.Println("Message received:", string(msg))
+		conn.Write([]byte(msg + "\n"))
+
+	}
+}
